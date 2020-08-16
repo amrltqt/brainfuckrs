@@ -22,8 +22,8 @@ impl BrainfuckInterpreter {
 
     pub fn interpret(&mut self) {    
 
-        while self.head != self.instruction_set.inner.len() {
-            match self.instruction_set.inner[self.head] {
+        while self.head != self.instruction_set.size() {
+            match self.instruction_set.get(self.head).unwrap() {
                 Instruction::IncrementByte => {
                     self.memory.increment();
                     self.head += 1;
@@ -73,7 +73,7 @@ impl BrainfuckInterpreter {
 
 // Search for the next closure
 fn next_closure_index(instruction_set: &InstructionSet, position: usize) -> Result<usize, InterpreterError>  {
-    let vec_size: usize = instruction_set.inner.len();
+    let vec_size: usize = instruction_set.size();
     if position >= vec_size {
         return Err(InterpreterError::IncorrectBehavior(
             String::from("Position should be at least eq to the last instruction position"))
@@ -81,7 +81,7 @@ fn next_closure_index(instruction_set: &InstructionSet, position: usize) -> Resu
     }
     let mut estimated_closure_position: usize = position + 1 ;
     for v in position + 1..vec_size  {
-        match instruction_set.inner[v] {
+        match instruction_set.get(v).unwrap() {
             Instruction::GoBack => {
                 return Ok(estimated_closure_position);
             }

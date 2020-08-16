@@ -22,6 +22,19 @@ pub struct InstructionSet {
     pub inner: Vec<Instruction>
 }
 
+impl InstructionSet {
+    pub fn get(&self, index: usize) -> Option<&Instruction> {
+        if index < self.inner.len() {
+            return Some(&self.inner[index])
+        }
+        None
+    }
+
+    pub fn size(&self) -> usize {
+        self.inner.len()
+    }
+}
+
 pub type MaybeInstruction = Result<Instruction, String>;
 
 fn match_instruction(c: char) -> MaybeInstruction {
