@@ -1,0 +1,19 @@
+[package]
+name = "brainfuckrs"
+version = "0.1.0"
+authors = ["Quentin Amirault <amirault.quentin@gmail.com>"]
+edition = "2018"
+include = [
+    "src/**/*.rs",
+    "Cargo.toml"
+]
+
+[lib]
+name = "brainfuckrs"
+path = "src/lib.rs"
+
+[[bin]]
+name = "brainfuckrs-interpreter"
+path = "src/bin/interpreter.rs"
+
+[dependencies]
